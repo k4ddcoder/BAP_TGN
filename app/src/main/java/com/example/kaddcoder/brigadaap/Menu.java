@@ -1,18 +1,30 @@
 package com.example.kaddcoder.brigadaap;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import androidx.annotation.NonNull;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 /**
@@ -20,6 +32,12 @@ import android.widget.Toast;
  * status bar and navigation/system bar) with user interaction.
  */
 public class Menu extends AppCompatActivity {
+
+    private Button enrere;
+    private ImageButton logout;
+    private AlertDialog popup;
+
+
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -113,6 +131,9 @@ public class Menu extends AppCompatActivity {
                         Menu.this.startActivity(MapaIntent);
                         startActivity(MapaIntent);
                         break;
+                    case R.id.settings_id:
+                        administratePopUp();
+
                 }
                 return true;
             }
@@ -171,5 +192,69 @@ public class Menu extends AppCompatActivity {
     private void delayedHide(int delayMillis) {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
+    }
+
+    private void administratePopUp() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final View customLayout = getLayoutInflater().inflate(R.layout.administrar_popup, null);
+        builder.setView(customLayout);
+
+        enrere = customLayout.findViewById(R.id.enrere);
+        logout = customLayout.findViewById(R.id.logout);
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signOut();
+
+            }
+        });
+
+        enrere = (Button) customLayout.findViewById(R.id.enrere);
+        enrere.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popup.dismiss();
+            }
+        });
+
+
+        popup = builder.create();
+        popup.show();
+
+
+    }
+
+    private void signOut() {
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        // Build a GoogleSignInClient with the options specified by gso.
+         GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(Menu.this);
+
+        if(acct != null) {
+            mGoogleSignInClient.signOut()
+                    .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Toast.makeText(Menu.this,"Successfully signed out",Toast.LENGTH_SHORT).show();
+                            Intent MainIntent = new Intent(Menu.this, MainActivity.class);
+                            Menu.this.startActivity(MainIntent);
+                            startActivity(MainIntent);
+                        }
+                    });
+
+        }else {
+            Intent MainIntent = new Intent(Menu.this, MainActivity.class);
+            Menu.this.startActivity(MainIntent);
+            startActivity(MainIntent);
+        }
+
+
     }
 }
