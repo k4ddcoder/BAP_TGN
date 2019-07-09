@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="66dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/about" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/pirata_one"
+        android:text="Contacta amb nosaltres"
+        android:textSize="24sp" />
+
+    <ImageButton
+        android:id="@+id/instagram"
+        android:layout_width="55dp"
+        android:layout_height="45dp"
+        android:layout_below="@+id/textView6"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="0dp"
+        android:layout_toStartOf="@+id/imageView2"
+        android:background="@drawable/insta2" />
+
+    <ImageButton
+        android:id="@+id/gmail"
+        android:layout_width="56dp"
+        android:layout_height="47dp"
+        android:layout_below="@+id/textView6"
+        android:layout_marginTop="21dp"
+        android:layout_toEndOf="@+id/imageView2"
+        android:background="@drawable/gmail" />
+
+    <Button
+        android:id="@+id/sortir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="184dp"
+        android:text="Sortir" />
+
+</RelativeLayout>

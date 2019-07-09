@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">BrigadaAP</string>
+
+    <string name="title_activity_menu">Menu</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="popup_zonabruta">Afegir zona bruta</string>
+    <string name="ok">Afegir</string>
+    <string name="cancell">Cancel·lar</string>
+    <string name="server_client_id">395077703667-6t4av0023mapdsv6fkn47vcujvdgvknc.apps.googleusercontent.com</string>
+</resources>
